@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+httpx
+requests
+matplotlib
+anyio
+pydantic-settings
+aiofiles
