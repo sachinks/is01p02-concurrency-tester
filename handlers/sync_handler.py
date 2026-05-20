@@ -1,25 +1,22 @@
 import requests
 import time
-from fastapi import FastAPI
-
+from fastapi import APIRouter
 from config import settings
 
-app = FastAPI()
+router = APIRouter()
 
-@app.post("/sync/chat")
+@router.post("/sync/chat")
 def sync_chat(prompt: str) -> dict:
     start = time.perf_counter()
-
     response = requests.post(
-        f"{settings.openai_base_url}/v1/chat/completions",
+        f"{settings.openai_base_url}/chat/completions",
         headers={"Authorization": f"Bearer {settings.openai_api_key}"},
         json={
             "model": settings.model_name,
             "messages": [{"role": "user", "content": prompt}],
         },
-        timeout=30,
+        timeout=60,
     )
-
     latency = time.perf_counter() - start
     return {
         "response": response.json()["choices"][0]["message"]["content"],
