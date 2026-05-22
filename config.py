@@ -5,7 +5,7 @@ class Settings(BaseSettings):
     openai_base_url: str = "http://localhost:11434/v1"
     model_name: str = "llama3.2"
 
-    concurrent_users: int = 20
+    concurrent_users: int = 10
     requests_per_user: int = 5
     test_prompt: str = "Reply with exactly one sentence about Python."
 
