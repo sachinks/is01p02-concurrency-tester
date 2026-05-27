@@ -126,3 +126,9 @@ CPU-bound work executes Python bytecode continuously — no waiting, no I/O, no 
 **Does asyncio bypass the GIL?**
 
 No. Asyncio is single-threaded — one thread, one GIL, no competition. The GIL is simply not relevant. What makes async I/O fast is not bypassing the GIL — it is cooperative suspension at `await` points, which lets one thread handle many concurrent I/O waits without blocking. Our sleep demo confirms this: 10 concurrent `asyncio.sleep(1)` calls completed in 1002ms. 10 concurrent `time.sleep(1)` calls took 10005ms — because `time.sleep` holds the thread and blocks the loop, while `asyncio.sleep` yields and lets the loop run all 10 simultaneously.
+
+---
+
+## License
+
+MIT © [Sachin Kolige](https://github.com/sachinks)
